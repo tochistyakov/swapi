@@ -1,0 +1,76 @@
+<div class="list" *ngIf="(starship$ | async) as starship; else loader">
+  <button routerLink="" class="back"></button>
+  <h3>{{ starship.name }}</h3>
+  <p>Model: 
+    <span>{{ starship.model }}</span>
+  </p>
+  <p>Manufacturer: 
+    <span>{{ starship.manufacturer }}</span>
+  </p>
+  <p>Cost in credits: 
+    <span>{{ starship.cost_in_credits }}</span>
+  </p>
+  <p>Length: 
+    <span>{{ starship.length }}</span>
+  </p>
+  <p>Max atmosphering speed: 
+    <span>{{ starship.max_atmosphering_speed }}</span>
+  </p>
+  <p>Crew: 
+    <span>{{ starship.crew }}</span>
+  </p>
+  <p>Passengers: 
+    <span>{{ starship.passengers }}</span>
+  </p>
+  <p>Cargo capacity: 
+    <span>{{ starship.cargo_capacity }}</span>
+  </p>
+  <p>Consumables: 
+    <span>{{ starship.consumables }}</span>
+  </p>
+  <p>Hyperdrive rating: 
+    <span>{{ starship.hyperdrive_rating }}</span>
+  </p>
+  <p>MGLT: 
+    <span>{{ starship.MGLT }}</span>
+  </p>
+  <p>Starship class: 
+    <span>{{ starship.starship_class }}</span>
+  </p>
+  <ul *ngIf="(starship.pilots.length > 0)">Pilots:
+    <li *ngFor="let pilot of starship.pilots"><a routerLink="/people/{{pilot.slice(29, pilot.length-1)}}">{{ pilot | nameFromApi }}</a></li>
+  </ul>
+  <ul *ngIf="(starship.films.length > 0)">Films:
+    <li *ngFor="let film of starship.films"><a routerLink="/films/{{film.slice(28, film.length-1)}}">{{ film | nameFromApi }}</a></li>
+  </ul>
+  <p>Created: 
+    <span>{{ starship.created }}</span>
+  </p>
+  <p>Edited: 
+    <span>{{ starship.edited }}</span>
+  </p>
+  
+</div>
+<ng-template #loader>
+  <div class="list">
+    <app-loader></app-loader>
+  </div>
+</ng-template>
+<!-- name: string,
+  model: string,
+  manufacturer: string,
+  cost_in_credits: string,
+  length: string,
+  max_atmosphering_speed: string,
+  crew: string,
+  passengers: string,
+  cargo_capacity: string,
+  consumables: string,
+  hyperdrive_rating: string,
+  MGLT: string,
+  starship_class: string,
+  pilots: Array<string>,
+  films: Array<string>,
+  created: string,
+  edited: string,
+  url: string -->

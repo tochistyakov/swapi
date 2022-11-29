@@ -1,0 +1,63 @@
+<div class="list" *ngIf="(planet$ | async) as planet; else loader">
+  <button routerLink="" class="back"></button>
+  <h3>{{ planet.name }}</h3>
+  <p>Rotation period: 
+    <span>{{ planet.rotation_period }}</span>
+  </p>
+  <p>Orbital period: 
+    <span>{{ planet.orbital_period }}</span>
+  </p>
+  <p>Diameter: 
+    <span>{{ planet.diameter }}</span>
+  </p>
+  <p>Climate: 
+    <span>{{ planet.climate }}</span>
+  </p>
+  <p>Gravity: 
+    <span>{{ planet.gravity }}</span>
+  </p>
+  <p>Terrain: 
+    <span>{{ planet.terrain }}</span>
+  </p>
+  <p>Surface water: 
+    <span>{{ planet.surface_water }}</span>
+  </p>
+  <p>Population: 
+    <span>{{ planet.population }}</span>
+  </p>
+  <ul *ngIf="(planet.residents.length > 0)">Residents:
+    <li *ngFor="let resident of planet.residents"><a routerLink="/people/{{resident.slice(29, resident.length-1)}}">{{ resident | nameFromApi }}</a></li>
+  </ul>
+  <ul *ngIf="(planet.films.length > 0)">Films:
+    <li *ngFor="let film of planet.films"><a routerLink="/films/{{film.slice(28, film.length-1)}}">{{ film | nameFromApi }}</a></li>
+  </ul>
+  <p>Created: 
+    <span>{{ planet.created }}</span>
+  </p>
+  <p>Edited: 
+    <span>{{ planet.edited }}</span>
+  </p>
+</div>
+<ng-template #loader>
+  <div class="list">
+    <app-loader></app-loader>
+  </div>
+</ng-template>
+
+
+
+
+<!-- "name": string,
+  "rotation_period": string,
+  "orbital_period": string,
+  "diameter": string,
+  "climate": string,
+  "gravity": string,
+  "terrain": string,
+  "surface_water": string,
+  "population": string,
+  "residents": Array<string>,
+  "films": Array<string>,
+  "created": string,
+  "edited": string,
+  "url": string -->

@@ -1,0 +1,69 @@
+<div class="list" *ngIf="(vehicle$ | async) as vehicle; else loader">
+  <button routerLink="" class="back"></button>
+  <h3>{{ vehicle.name }}</h3>
+  <p>Model: 
+    <span>{{ vehicle.model }}</span>
+  </p>
+  <p>Manufacturer: 
+    <span>{{ vehicle.manufacturer }}</span>
+  </p>
+  <p>Cost in credits: 
+    <span>{{ vehicle.cost_in_credits }}</span>
+  </p>
+  <p>Length: 
+    <span>{{ vehicle.length }}</span>
+  </p>
+  <p>Max atmosphering speed: 
+    <span>{{ vehicle.max_atmosphering_speed }}</span>
+  </p>
+  <p>Crew: 
+    <span>{{ vehicle.crew }}</span>
+  </p>
+  <p>Passengers: 
+    <span>{{ vehicle.passengers }}</span>
+  </p>
+  <p>Cargo capacity: 
+    <span>{{ vehicle.cargo_capacity }}</span>
+  </p>
+  <p>Consumables: 
+    <span>{{ vehicle.consumables }}</span>
+  </p>
+  <p>Vehicle class: 
+    <span>{{ vehicle.vehicle_class }}</span>
+  </p>
+  <ul *ngIf="(vehicle.pilots.length > 0)">Pilots:
+    <li *ngFor="let pilot of vehicle.pilots"><a routerLink="/people/{{pilot.slice(29, pilot.length-1)}}">{{ pilot | nameFromApi }}</a></li>
+  </ul>
+  <ul *ngIf="(vehicle.films.length > 0)">Films:
+    <li *ngFor="let film of vehicle.films"><a routerLink="/films/{{film.slice(28, film.length-1)}}">{{ film | nameFromApi }}</a></li>
+  </ul>
+  <p>Created: 
+    <span>{{ vehicle.created }}</span>
+  </p>
+  <p>Edited: 
+    <span>{{ vehicle.edited }}</span>
+  </p>
+  
+</div>
+<ng-template #loader>
+  <div class="list">
+    <app-loader></app-loader>
+  </div>
+</ng-template>
+
+<!-- name: string,
+model: string,
+manufacturer: string,
+cost_in_credits: string,
+length: string,
+max_atmosphering_speed: string,
+crew: string,
+passengers: string,
+cargo_capacity: string,
+consumables: string,
+vehicle_class: string,
+pilots: Array<string>,
+films: Array<string>,
+created: string,
+edited: string,
+url: string -->

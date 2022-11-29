@@ -1,0 +1,64 @@
+<div class="list" *ngIf="(specie$ | async) as specie; else loader">
+  <button routerLink="" class="back"></button>
+  <h3>{{ specie.name }}</h3>
+  <p>Classification: 
+    <span>{{ specie.classification }}</span>
+  </p>
+  <p>Designation: 
+    <span>{{ specie.designation }}</span>
+  </p>
+  <p>Average height: 
+    <span>{{ specie.average_height }}</span>
+  </p>
+  <p>Skin colors: 
+    <span>{{ specie.skin_colors }}</span>
+  </p>
+  <p>Hair colors: 
+    <span>{{ specie.hair_colors }}</span>
+  </p>
+  <p>Eye colors: 
+    <span>{{ specie.eye_colors }}</span>
+  </p>
+  <p>Average lifespan: 
+    <span>{{ specie.average_lifespan }}</span>
+  </p>
+  <ul *ngIf="specie.homeworld != null">Homeworld:
+    <li><a routerLink="/planets/{{specie.homeworld.slice(30, specie.homeworld.length-1)}}">{{ specie.homeworld | nameFromApi }}</a></li>
+  </ul>
+  <p>Language: 
+    <span>{{ specie.language }}</span>
+  </p>
+  <ul *ngIf="(specie.people.length > 0)">People:
+    <li *ngFor="let people of specie.people"><a routerLink="/people/{{people.slice(29, people.length-1)}}">{{ people | nameFromApi }}</a></li>
+  </ul>
+  <ul *ngIf="(specie.films.length > 0)">Films:
+    <li *ngFor="let film of specie.films"><a routerLink="/films/{{film.slice(28, film.length-1)}}">{{ film | nameFromApi }}</a></li>
+  </ul>
+  <p>Created: 
+    <span>{{ specie.created }}</span>
+  </p>
+  <p>Edited: 
+    <span>{{ specie.edited }}</span>
+  </p>
+</div>
+<ng-template #loader>
+  <div class="list">
+    <app-loader></app-loader>
+  </div>
+</ng-template>
+
+<!-- name: string,
+classification: string,
+designation: string,
+average_height: string,
+skin_colors: string,
+hair_colors: string,
+eye_colors: string,
+average_lifespan: string,
+homeworld: string,
+language: string,
+people: Array<string>,
+films: Array<string>,
+created: string,
+edited: string,
+url: string -->

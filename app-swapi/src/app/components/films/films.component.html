@@ -1,0 +1,24 @@
+
+<div class="list listItems" *ngIf="(filmsList$ | async) as filmsList; else loader">
+  <button routerLink="" class="back"></button>
+  <ul>
+    <li *ngFor="let item of filmsList.results">
+      <a routerLink="{{item.url.slice(28, item.url.length-1)}}">{{item.title | uppercase}}</a>
+    </li>
+    
+  </ul>
+  <div class="prevNextContainer">
+    <div>
+      <button *ngIf="filmsList.previous" class="previous" (click)="changePage(filmsList.previous)"></button>
+    </div>
+    <div>
+      <button *ngIf="filmsList.next" class="next" (click)="changePage(filmsList.next)"></button>
+    </div>
+  </div>
+
+</div>
+<ng-template #loader>
+  <div class="list">
+    <app-loader></app-loader>
+  </div>
+</ng-template>
