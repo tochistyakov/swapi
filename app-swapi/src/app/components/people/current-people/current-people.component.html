@@ -1,62 +1,67 @@
-<div class="list" *ngIf="(people$ | async) as people; else loader">
-  <button routerLink="" class="back"></button>
-  <h3>{{ people.name }}</h3>
-  <p>Height: 
-    <span>{{ people.height }}</span>
-  </p>
-  <p>Mass: 
-    <span>{{ people.mass }}</span>
-  </p>
-  <p>Hair color: 
-    <span>{{ people.hair_color }}</span>
-  </p>
-  <p>Skin color: 
-    <span>{{ people.skin_color }}</span>
-  </p>
-  <p>Eye color: 
-    <span>{{ people.eye_color }}</span>
-  </p>
-  <p>Birth year: 
-    <span>{{ people.birth_year }}</span>
-  </p>
-  <p>Gender: 
-    <span>{{ people.gender }}</span>
-  </p>
-  <!-- <p>Homeworld: {{ people.homeworld }}</p> -->
-  <ul>Homeworld:
-    <li>
-      <a routerLink="/planets/{{people.homeworld.slice(30, people.homeworld.length-1)}}">
-        {{ people.homeworld | nameFromApi }}
-      </a>
-    </li>
-  </ul>
-  
-  <ul *ngIf="(people.films.length > 0)">Films:
-    <li *ngFor="let film of people.films"><a routerLink="/films/{{film.slice(28, film.length-1)}}">{{ film | nameFromApi }}</a></li>
-  </ul>
-  <ul *ngIf="(people.species.length > 0)">Species:
-    <li *ngFor="let specie of people.species"><a routerLink="/species/{{specie.slice(30, specie.length-1)}}">{{ specie | nameFromApi }}</a></li>
-  </ul>
-  <ul *ngIf="(people.vehicles.length > 0)">Vehicles:
-    <li *ngFor="let vehicle of people.vehicles"><a routerLink="/vehicles/{{vehicle.slice(31, vehicle.length-1)}}">{{ vehicle | nameFromApi }}</a></li>
-  </ul>
-  <ul *ngIf="(people.starships.length > 0)">Starships:
-    <li *ngFor="let starship of people.starships"><a routerLink="/starships/{{starship.slice(32, starship.length-1)}}">{{ starship | nameFromApi }}</a></li>
-  </ul>
-  <p>Created: 
-    <span>{{ people.created }}</span>
-  </p>
-  <p>Edited: 
-    <span>{{ people.edited }}</span>
-  </p>
+<div *ngIf="!appGetApisService.isError; else error404">
 
-  
-</div>
-<ng-template #loader>
-  <div class="list">
-    <app-loader></app-loader>
+  <div class="list" *ngIf="(people$ | async) as people; else loader">
+    <button routerLink="" class="back"></button>
+    <h3 class="--orange">{{ people.name }}</h3>
+    <p>Height: 
+      <span class="--orange">{{ people.height }}</span>
+    </p>
+    <p>Mass: 
+      <span class="--orange">{{ people.mass }}</span>
+    </p>
+    <p>Hair color: 
+      <span class="--orange">{{ people.hair_color }}</span>
+    </p>
+    <p>Skin color: 
+      <span class="--orange">{{ people.skin_color }}</span>
+    </p>
+    <p>Eye color: 
+      <span class="--orange">{{ people.eye_color }}</span>
+    </p>
+    <p>Birth year: 
+      <span class="--orange">{{ people.birth_year }}</span>
+    </p>
+    <p>Gender: 
+      <span class="--orange">{{ people.gender }}</span>
+    </p>
+    <!-- <p>Homeworld: {{ people.homeworld }}</p> -->
+    <ul>Homeworld:
+      <li class="item">
+        <a class="--orange" routerLink="/planets/{{people.homeworld.slice(30, people.homeworld.length-1)}}">
+          {{ people.homeworld | nameFromApi }}
+        </a>
+      </li>
+    </ul>
+    
+    <ul *ngIf="(people.films.length > 0)">Films:
+      <li class="item" *ngFor="let film of people.films"><a class="--orange" routerLink="/films/{{film.slice(28, film.length-1)}}">{{ film | nameFromApi }}</a></li>
+    </ul>
+    <ul *ngIf="(people.species.length > 0)">Species:
+      <li class="item" *ngFor="let specie of people.species"><a class="--orange" routerLink="/species/{{specie.slice(30, specie.length-1)}}">{{ specie | nameFromApi }}</a></li>
+    </ul>
+    <ul *ngIf="(people.vehicles.length > 0)">Vehicles:
+      <li class="item" *ngFor="let vehicle of people.vehicles"><a class="--orange" routerLink="/vehicles/{{vehicle.slice(31, vehicle.length-1)}}">{{ vehicle | nameFromApi }}</a></li>
+    </ul>
+    <ul *ngIf="(people.starships.length > 0)">Starships:
+      <li class="item" *ngFor="let starship of people.starships"><a class="--orange" routerLink="/starships/{{starship.slice(32, starship.length-1)}}">{{ starship | nameFromApi }}</a></li>
+    </ul>
+    <p>Created: 
+      <span class="--orange">{{ people.created | date:'medium' }}</span>
+    </p>
+    <p>Edited: 
+      <span class="--orange">{{ people.edited | date:'medium' }}</span>
+    </p>
   </div>
+  <ng-template #loader>
+    <div class="list">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+</div>
+<ng-template #error404>
+  <app-four-zero-four></app-four-zero-four>
 </ng-template>
+
 <!-- name: string,
 height: string,
 mass: string,

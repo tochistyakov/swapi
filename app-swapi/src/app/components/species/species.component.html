@@ -1,8 +1,15 @@
 <div class="list listItems" *ngIf="(speciesList$ | async) as speciesList; else loader">
   <button routerLink="" class="back"></button>
+  <div class="search__container">
+    <input class="search__input" type="text" name="search" #search autocomplete="off" (keyup.enter)="changePage('https://swapi.dev/api/species/?search=' + search.value)">
+    <button class="search__button" type="button" (click)="changePage('https://swapi.dev/api/species/?search=' + search.value)"></button>
+  </div>
   <ul>
-    <li *ngFor="let item of speciesList.results">
-      <a routerLink="{{item.url.slice(30, item.url.length-1)}}">{{item.name | uppercase}}</a>
+    <li class="item" *ngFor="let item of speciesList.results" routerLink="{{item.url.slice(30, item.url.length-1)}}" tabindex="-1">
+      <a class="--orange" routerLink="{{item.url.slice(30, item.url.length-1)}}">{{item.name | uppercase}}</a>
+      <p>Classification:
+        <span class="--orange">{{item.classification}}</span>
+      </p>
     </li>
     
   </ul>
@@ -17,7 +24,7 @@
 
 </div>
 <ng-template #loader>
-  <div class="list">
+  <div>
     <app-loader></app-loader>
   </div>
 </ng-template>

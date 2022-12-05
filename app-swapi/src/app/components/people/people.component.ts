@@ -33,6 +33,8 @@ export class PeopleComponent implements OnInit {
     if (url === null) url = '';
 
     this.peopleList$ =  this.appGetApisService.getPeopleList(url);
+
+    console.log(url);
     
     // this.peopleList$.subscribe((data) => {console.log(data)});
   }

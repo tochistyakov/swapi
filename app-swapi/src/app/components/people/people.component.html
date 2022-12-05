@@ -1,9 +1,19 @@
 
 <div class="list listItems" *ngIf="(peopleList$ | async) as peopleList; else loader">
   <button routerLink="" class="back"></button>
+  <div class="search__container">
+    <input class="search__input" type="text" name="search" #search autocomplete="off" (keyup.enter)="changePage('https://swapi.dev/api/people/?search=' + search.value)">
+    <button class="search__button" type="button" (click)="changePage('https://swapi.dev/api/people/?search=' + search.value)"></button>
+  </div>
   <ul>
-    <li *ngFor="let item of peopleList.results">
-      <a routerLink="{{item.url.slice(29, item.url.length-1)}}">{{item.name | uppercase}}</a>
+    <li class="item" *ngFor="let item of peopleList.results" routerLink="{{item.url.slice(29, item.url.length-1)}}" tabindex="-1">
+      <a class="--orange" routerLink="{{item.url.slice(29, item.url.length-1)}}">{{item.name | uppercase}}</a>
+      <p>Height: 
+        <span class="--orange">{{item.height}}</span>
+      </p>
+      <p>Mass: 
+        <span class="--orange">{{item.mass}}</span>
+      </p>
     </li>
     
   </ul>
@@ -18,7 +28,7 @@
 
 </div>
 <ng-template #loader>
-  <div class="list">
+  <div>
     <app-loader></app-loader>
   </div>
 </ng-template>

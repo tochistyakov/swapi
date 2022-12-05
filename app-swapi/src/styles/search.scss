@@ -1,0 +1,28 @@
+.search__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search__input {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid rgb(213, 145, 31);
+  color: rgb(250, 202, 16);
+  margin: 0 10px;
+}
+.search__button {
+  width: 30px;
+  height: 30px;
+  background-image: url(../assets/images/search.png);
+  background-color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  margin: 0;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}

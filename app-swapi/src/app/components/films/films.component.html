@@ -2,8 +2,11 @@
 <div class="list listItems" *ngIf="(filmsList$ | async) as filmsList; else loader">
   <button routerLink="" class="back"></button>
   <ul>
-    <li *ngFor="let item of filmsList.results">
-      <a routerLink="{{item.url.slice(28, item.url.length-1)}}">{{item.title | uppercase}}</a>
+    <li class="item" *ngFor="let item of filmsList.results" routerLink="{{item.url.slice(28, item.url.length-1)}}" tabindex="-1">
+      <a class="--orange" routerLink="{{item.url.slice(28, item.url.length-1)}}">Episode {{item.episode_id}}: {{item.title | uppercase}}</a>
+      <p>Release date: 
+        <span class="--orange">{{item.release_date}}</span>
+      </p>
     </li>
     
   </ul>
@@ -18,7 +21,7 @@
 
 </div>
 <ng-template #loader>
-  <div class="list">
+  <div>
     <app-loader></app-loader>
   </div>
 </ng-template>

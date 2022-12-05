@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CurrentFilmComponent } from './components/films/current-film/current-film.component';
 import { FilmsComponent } from './components/films/films.component';
+import { FourZeroFourComponent } from './components/four-zero-four/four-zero-four.component';
 import { NavigateComponent } from './components/navigate/navigate.component';
 import { CurrentPeopleComponent } from './components/people/current-people/current-people.component';
 import { PeopleComponent } from './components/people/people.component';
@@ -28,7 +29,7 @@ const routes: Routes = [
   {path: 'species/:id', component: CurrentSpecieComponent},
   {path: 'vehicles/:id', component: CurrentVehicleComponent},
   {path: 'starships/:id', component: CurrentStarshipComponent},
-  {path: '**', redirectTo: ''}
+  {path: '**', component: FourZeroFourComponent}
 ];
 
 @NgModule({

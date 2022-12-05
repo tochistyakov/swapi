@@ -14,8 +14,9 @@ export class CurrentSpecieComponent implements OnInit {
   public specie$!: Observable<ISpecie>;
   private id: number;
 
-  constructor(private appGetApisService: GetApisService, private route: ActivatedRoute) { 
+  constructor(public appGetApisService: GetApisService, private route: ActivatedRoute) { 
     this.id = 0;
+    appGetApisService.isError = false;
   }
 
   ngOnInit(): void {

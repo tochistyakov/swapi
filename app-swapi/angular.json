@@ -50,8 +50,7 @@
               "src/assets"
             ],
             "styles": [
-              
-              "src/assets/sass/core.scss"
+              "src/styles/core.scss"
             ],
             "scripts": []
           },

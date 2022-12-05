@@ -1,49 +1,68 @@
-<div class="list" *ngIf="(planet$ | async) as planet; else loader">
-  <button routerLink="" class="back"></button>
-  <h3>{{ planet.name }}</h3>
-  <p>Rotation period: 
-    <span>{{ planet.rotation_period }}</span>
-  </p>
-  <p>Orbital period: 
-    <span>{{ planet.orbital_period }}</span>
-  </p>
-  <p>Diameter: 
-    <span>{{ planet.diameter }}</span>
-  </p>
-  <p>Climate: 
-    <span>{{ planet.climate }}</span>
-  </p>
-  <p>Gravity: 
-    <span>{{ planet.gravity }}</span>
-  </p>
-  <p>Terrain: 
-    <span>{{ planet.terrain }}</span>
-  </p>
-  <p>Surface water: 
-    <span>{{ planet.surface_water }}</span>
-  </p>
-  <p>Population: 
-    <span>{{ planet.population }}</span>
-  </p>
-  <ul *ngIf="(planet.residents.length > 0)">Residents:
-    <li *ngFor="let resident of planet.residents"><a routerLink="/people/{{resident.slice(29, resident.length-1)}}">{{ resident | nameFromApi }}</a></li>
-  </ul>
-  <ul *ngIf="(planet.films.length > 0)">Films:
-    <li *ngFor="let film of planet.films"><a routerLink="/films/{{film.slice(28, film.length-1)}}">{{ film | nameFromApi }}</a></li>
-  </ul>
-  <p>Created: 
-    <span>{{ planet.created }}</span>
-  </p>
-  <p>Edited: 
-    <span>{{ planet.edited }}</span>
-  </p>
-</div>
-<ng-template #loader>
-  <div class="list">
-    <app-loader></app-loader>
+<div *ngIf="!appGetApisService.isError; else error404">
+  <div class="list" *ngIf="(planet$ | async) as planet; else loader">
+    <button routerLink="" class="back"></button>
+    <h3 class="--orange">{{ planet.name }}</h3>
+    <p>Rotation period: 
+      <span class="--orange">{{ planet.rotation_period }}</span>
+    </p>
+    <p>Orbital period: 
+      <span class="--orange">{{ planet.orbital_period }}</span>
+    </p>
+    <p>Diameter: 
+      <span class="--orange">{{ planet.diameter }}</span>
+    </p>
+    <p>Climate: 
+      <span class="--orange">{{ planet.climate }}</span>
+    </p>
+    <div class="images__container">
+      <div *ngIf="planet.climate.includes('arid')" class="image --arid"></div>
+      <div *ngIf="planet.climate.includes('frigid')" class="image --frigid"></div>
+      <div *ngIf="planet.climate.includes('frozen')" class="image --frozen"></div>
+      <div *ngIf="planet.climate.includes('hot')" class="image --hot"></div>
+      <div *ngIf="planet.climate.includes('humid')" class="image --humid"></div>
+      <div *ngIf="planet.climate.includes('moist')" class="image --moist"></div>
+      <div *ngIf="planet.climate.includes('murky')" class="image --murky"></div>
+      <div *ngIf="planet.climate.includes('polluted')" class="image --polluted"></div>
+      <div *ngIf="planet.climate.includes('temperate')" class="image --temperate"></div>
+      <div *ngIf="planet.climate.includes('tropical')" class="image --tropical"></div>
+      <div *ngIf="planet.climate.includes('windy')" class="image --windy"></div>
+  
+    </div>
+    <p>Gravity: 
+      <span class="--orange">{{ planet.gravity }}</span>
+    </p>
+    <p>Terrain: 
+      <span class="--orange">{{ planet.terrain }}</span>
+    </p>
+    <p>Surface water: 
+      <span class="--orange">{{ planet.surface_water }}</span>
+    </p>
+    <p>Population: 
+      <span class="--orange">{{ planet.population }}</span>
+    </p>
+    <ul *ngIf="(planet.residents.length > 0)">Residents:
+      <li class="item" *ngFor="let resident of planet.residents"><a class="--orange" routerLink="/people/{{resident.slice(29, resident.length-1)}}">{{ resident | nameFromApi }}</a></li>
+    </ul>
+    <ul *ngIf="(planet.films.length > 0)">Films:
+      <li class="item" *ngFor="let film of planet.films"><a class="--orange" routerLink="/films/{{film.slice(28, film.length-1)}}">{{ film | nameFromApi }}</a></li>
+    </ul>
+    <p>Created: 
+      <span class="--orange">{{ planet.created | date:'medium' }}</span>
+    </p>
+    <p>Edited: 
+      <span class="--orange">{{ planet.edited | date:'medium' }}</span>
+    </p>
   </div>
+  <ng-template #loader>
+    <div class="list">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+  
+</div>
+<ng-template #error404>
+  <app-four-zero-four></app-four-zero-four>
 </ng-template>
-
 
 
 

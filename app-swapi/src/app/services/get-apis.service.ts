@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap } from 'rxjs';
 import { IFilm } from '../types/film.interface';
 import { IFilmsList } from '../types/filmsList.interface';
 import { IPeople } from '../types/people.interface';
@@ -18,6 +18,7 @@ import { IVehiclesList } from '../types/vehiclesList.interface';
   providedIn: 'root'
 })
 export class GetApisService {
+  public isError = false;
 
   
 
@@ -49,24 +50,66 @@ export class GetApisService {
     return this.http.get<IStarshipsList>(url);
   }
   getPeople(id: number): Observable<IPeople> {
-    return this.http.get<IPeople>(`https://swapi.dev/api/people/${id}/`);
+    return this.http.get<IPeople>(`https://swapi.dev/api/people/${id}/`)
+    .pipe(
+      catchError(err => {  
+        console.log(err); 
+        this.isError = true;
+        return [];
+      })
+    );
     // return this.http.get<any>(`../../assets/swapi/api/people/${id}.json`);
   }
   getPlanet(id: number): Observable<IPlanet> {
-    return this.http.get<IPlanet>(`https://swapi.dev/api/planets/${id}/`);
+    return this.http.get<IPlanet>(`https://swapi.dev/api/planets/${id}/`)
+    .pipe(
+      catchError(err => {  
+        console.log(err); 
+        this.isError = true;
+        return [];
+      })
+    );
     // return this.http.get<any>(`../../assets/swapi/api/planet/${id}.json`);
   }
   getFilm(id: number): Observable<IFilm> {
-    return this.http.get<IFilm>(`https://swapi.dev/api/films/${id}/`);
+    return this.http.get<IFilm>(`https://swapi.dev/api/films/${id}/`)
+    .pipe(
+      catchError(err => {  
+        console.log(err); 
+        this.isError = true;
+        return [];
+      })
+    );
   }
   getSpecie(id: number): Observable<ISpecie> {
-    return this.http.get<ISpecie>(`https://swapi.dev/api/species/${id}/`);
+    return this.http.get<ISpecie>(`https://swapi.dev/api/species/${id}/`)
+    .pipe(
+      catchError(err => {  
+        console.log(err); 
+        this.isError = true;
+        return [];
+      })
+    );
   }
   getVehicle(id: number): Observable<IVehicle> {
-    return this.http.get<IVehicle>(`https://swapi.dev/api/vehicles/${id}/`);
+    return this.http.get<IVehicle>(`https://swapi.dev/api/vehicles/${id}/`)
+    .pipe(
+      catchError(err => {  
+        console.log(err); 
+        this.isError = true;
+        return [];
+      })
+    );
   }
   getStarship(id: number): Observable<IStarship> {
-    return this.http.get<IStarship>(`https://swapi.dev/api/starships/${id}/`);
+    return this.http.get<IStarship>(`https://swapi.dev/api/starships/${id}/`)
+    .pipe(
+      catchError(err => {  
+        console.log(err); 
+        this.isError = true;
+        return [];
+      })
+    );
   }
   getItem(url: string): Observable<any> {
     return this.http.get<any>(url);

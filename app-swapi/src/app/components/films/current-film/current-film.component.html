@@ -1,45 +1,56 @@
-<div class="list" *ngIf="(films$ | async) as film; else loader">
-  <button routerLink="" class="back"></button>
-  <h3>Episode {{film.episode_id}}: {{ film.title }}</h3>
-  <p>Opening crawl: 
-    <span>{{ film.opening_crawl  }}</span>
-  </p>
-  <p>Director: 
-    <span>{{ film.director  }}</span>
-  </p>
-  <p>Producer: 
-    <span>{{ film.producer  }}</span>
-  </p>
-  <p>Release date: 
-    <span>{{ film.release_date  }}</span>
-  </p>
-  <ul *ngIf="(film.characters.length > 0)">Characters:
-    <li *ngFor="let character of film.characters"><a routerLink="/people/{{character.slice(29, character.length-1)}}">{{ character | nameFromApi }}</a></li>
-  </ul>
-  <ul *ngIf="(film.planets.length > 0)">Planets:
-    <li *ngFor="let planet of film.planets"><a routerLink="/planets/{{planet.slice(30, planet.length-1)}}">{{ planet | nameFromApi }}</a></li>
-  </ul>
-  <ul *ngIf="(film.starships.length > 0)">Starships:
-    <li *ngFor="let starship of film.starships"><a routerLink="/starships/{{starship.slice(32, starship.length-1)}}">{{ starship | nameFromApi }}</a></li>
-  </ul>
-  <ul *ngIf="(film.vehicles.length > 0)">Vehicles:
-    <li *ngFor="let vehicle of film.vehicles"><a routerLink="/vehicles/{{vehicle.slice(31, vehicle.length-1)}}">{{ vehicle | nameFromApi }}</a></li>
-  </ul>
-  <ul *ngIf="(film.species.length > 0)">Species:
-    <li *ngFor="let specie of film.species"><a routerLink="/species/{{specie.slice(30, specie.length-1)}}">{{ specie | nameFromApi }}</a></li>
-  </ul>
-  <p>Created: 
-    <span>{{ film.created }}</span>
-  </p>
-  <p>Edited: 
-    <span>{{ film.edited }}</span>
-  </p>
-  
-</div>
-<ng-template #loader>
-  <div class="list">
-    <app-loader></app-loader>
+<div *ngIf="!appGetApisService.isError; else error404">
+  <div class="list" *ngIf="(films$ | async) as film; else loader">
+    <button routerLink="" class="back"></button>
+    <h3 class="--orange">Episode {{film.episode_id}}: {{ film.title }}</h3>
+    <p>Opening crawl: 
+      <span class="--orange">{{ film.opening_crawl  }}</span>
+    </p>
+    <p>Director: 
+      <span class="--orange">{{ film.director  }}</span>
+    </p>
+    <div class="images__container">
+      <div *ngIf="film.director.includes('Kershner')" class="image --kershner"></div>
+      <div *ngIf="film.director.includes('Lucas')" class="image --lucas"></div>
+      <div *ngIf="film.director.includes('Marquand')" class="image --marquand"></div>
+    </div>
+    <p>Producer: 
+      <span class="--orange">{{ film.producer  }}</span>
+    </p>
+    <p>Release date: 
+      <span class="--orange">{{ film.release_date  }}</span>
+    </p>
+    <ul *ngIf="(film.characters.length > 0)">Characters:
+      <li class="item" *ngFor="let character of film.characters"><a class="--orange" routerLink="/people/{{character.slice(29, character.length-1)}}">{{ character | nameFromApi }}</a></li>
+    </ul>
+    <ul *ngIf="(film.planets.length > 0)">Planets:
+      <li class="item" *ngFor="let planet of film.planets"><a class="--orange" routerLink="/planets/{{planet.slice(30, planet.length-1)}}">{{ planet | nameFromApi }}</a></li>
+    </ul>
+    <ul *ngIf="(film.starships.length > 0)">Starships:
+      <li class="item" *ngFor="let starship of film.starships"><a class="--orange" routerLink="/starships/{{starship.slice(32, starship.length-1)}}">{{ starship | nameFromApi }}</a></li>
+    </ul>
+    <ul *ngIf="(film.vehicles.length > 0)">Vehicles:
+      <li class="item" *ngFor="let vehicle of film.vehicles"><a class="--orange" routerLink="/vehicles/{{vehicle.slice(31, vehicle.length-1)}}">{{ vehicle | nameFromApi }}</a></li>
+    </ul>
+    <ul *ngIf="(film.species.length > 0)">Species:
+      <li class="item" *ngFor="let specie of film.species"><a class="--orange" routerLink="/species/{{specie.slice(30, specie.length-1)}}">{{ specie | nameFromApi }}</a></li>
+    </ul>
+    <p>Created: 
+      <span class="--orange">{{ film.created | date:'medium' }}</span>
+    </p>
+    <p>Edited: 
+      <span class="--orange">{{ film.edited | date:'medium' }}</span>
+    </p>
+    
   </div>
+  <ng-template #loader>
+    <div class="list">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+
+</div>
+<ng-template #error404>
+  <app-four-zero-four></app-four-zero-four>
 </ng-template>
 
 

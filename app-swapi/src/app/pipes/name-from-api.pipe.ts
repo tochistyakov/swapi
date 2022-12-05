@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { finalize, Observable, share, take, tap } from 'rxjs';
 import { GetApisService } from '../services/get-apis.service';
 
 @Pipe({
@@ -7,14 +8,13 @@ import { GetApisService } from '../services/get-apis.service';
 })
 export class NameFromApiPipe implements PipeTransform {
   
-  public val: string;
+  public val: string = '';
   private type: string = '';
-  private id: number = 0;
-  private item!: any;
+  public id: number = 0;
   private requestedUrl = '';
 
   constructor(private appGetApisService: GetApisService) {
-    this.val = '';
+    
   }
 
   transform(url: string): string {
@@ -24,14 +24,22 @@ export class NameFromApiPipe implements PipeTransform {
 
     if (!this.val && url !== this.requestedUrl) {
       this.requestedUrl = url;
-      this.appGetApisService.getItem(url).subscribe(data => {
-        if (this.type === 'films') {
-          this.val = data.title; 
-        } else this.val = data.name;
-        
-      });
+      const sub: any = this.appGetApisService.getItem(url)
+      .pipe(
+        take(1),
+        tap(data => {
+          if (this.type === 'films') {
+            this.val = data.title; 
+          } else this.val = data.name;
+        }),
+        finalize(() => {
+          sub.unsubscribe();
+        }),
+        share()
+      )
+      .subscribe();
     }
-
+    console.log('Why is this being called 40 times for 1 pipe???')
     return this.val;
   }
 

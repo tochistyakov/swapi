@@ -1,8 +1,15 @@
 <div class="list listItems" *ngIf="(starshipsList$ | async) as starshipsList; else loader">
   <button routerLink="" class="back"></button>
+  <div class="search__container">
+    <input class="search__input" type="text" name="search" #search autocomplete="off" (keyup.enter)="changePage('https://swapi.dev/api/starships/?search=' + search.value)">
+    <button class="search__button" type="button" (click)="changePage('https://swapi.dev/api/starships/?search=' + search.value)"></button>
+  </div>
   <ul>
-    <li *ngFor="let item of starshipsList.results">
-      <a routerLink="{{item.url.slice(32, item.url.length-1)}}">{{item.name | uppercase}}</a>
+    <li class="item" *ngFor="let item of starshipsList.results" routerLink="{{item.url.slice(32, item.url.length-1)}}" tabindex="-1">
+      <a class="--orange" routerLink="{{item.url.slice(32, item.url.length-1)}}">{{item.name | uppercase}}</a>
+      <p>Starship class: 
+        <span class="--orange">{{item.starship_class}}</span>
+      </p>
     </li>
     
   </ul>
@@ -17,7 +24,7 @@
 
 </div>
 <ng-template #loader>
-  <div class="list">
+  <div>
     <app-loader></app-loader>
   </div>
 </ng-template>

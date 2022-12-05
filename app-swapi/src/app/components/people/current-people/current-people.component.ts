@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 import { GetApisService } from 'src/app/services/get-apis.service';
 import { IPeople } from 'src/app/types/people.interface';
 
@@ -14,11 +14,13 @@ export class CurrentPeopleComponent implements OnInit {
   public people$!: Observable<IPeople>;
   private id: number;
 
-  constructor(private appGetApisService: GetApisService, private route: ActivatedRoute) {
+  constructor(public appGetApisService: GetApisService, private route: ActivatedRoute) {
     this.id = 0;
+    appGetApisService.isError = false;
    }
 
   ngOnInit(): void {
+
     this.people$ = this.route.params.pipe(
       switchMap((params: Params) => {
       this.id = params['id'];

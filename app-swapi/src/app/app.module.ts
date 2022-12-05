@@ -20,6 +20,7 @@ import { CurrentVehicleComponent } from './components/vehicles/current-vehicle/c
 import { CurrentStarshipComponent } from './components/starships/current-starship/current-starship.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NameFromApiPipe } from './pipes/name-from-api.pipe';
+import { FourZeroFourComponent } from './components/four-zero-four/four-zero-four.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NameFromApiPipe } from './pipes/name-from-api.pipe';
     CurrentVehicleComponent,
     CurrentStarshipComponent,
     LoaderComponent,
-    NameFromApiPipe
+    NameFromApiPipe,
+    FourZeroFourComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,57 @@
+.images__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 70px;
+  height: 50px;
+  margin: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.--arid {
+  background-image: url(../assets/images/planet_climat/arid.png);
+}
+.--frigid {
+  background-image: url(../assets/images/planet_climat/frigid.png);
+}
+.--frozen {
+  background-image: url(../assets/images/planet_climat/frozen.png);
+}
+.--hot {
+  background-image: url(../assets/images/planet_climat/hot.png);
+}
+.--humid {
+  background-image: url(../assets/images/planet_climat/humid.png);
+}
+.--moist {
+  background-image: url(../assets/images/planet_climat/moist.png);
+}
+.--murky {
+  background-image: url(../assets/images/planet_climat/murky.png);
+}
+.--polluted {
+  background-image: url(../assets/images/planet_climat/polluted.png);
+}
+.--temperate {
+  background-image: url(../assets/images/planet_climat/temperate.png);
+}
+.--tropical {
+  background-image: url(../assets/images/planet_climat/tropical.png);
+}
+.--windy {
+  background-image: url(../assets/images/planet_climat/windy.png);
+}
+
+.--kershner {
+  background-image: url(../assets/images/film_director/kershner.png);
+}
+.--lucas {
+  background-image: url(../assets/images/film_director/lucas.png);
+}
+.--marquand {
+  background-image: url(../assets/images/film_director/marquand.png);
+}
